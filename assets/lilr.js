@@ -30,4 +30,17 @@ var lookUpCode = process.argv[2];
     console.log(showData);
   });
 } else if ((lookUpCode = "concert-this")) {
+  var artist = process.argv.slice(3).join(" ");
+
+  var queryUrl =
+    "https://rest.bandsintown.com/artists/" +
+    artist +
+    "/events?app_id=codingbootcamp";
+
+  axios.get(queryUrl).then(function(response) {
+    var jsonData = response.data;
+    console.log(jsonData);
+    if (err) throw err;
+    console.log(showData);
+  });
 }

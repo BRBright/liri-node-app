@@ -1,5 +1,6 @@
-var axios = require("./.gitignore/node_modules/axios");
+var axios = require("axios");
 var keys = require("./keys.js");
+const Spotify = require("node-spotify-api");
 var spotify = new Spotify(keys.spotify);
 
 var lookUpCode = process.argv[2];

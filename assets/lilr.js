@@ -1,23 +1,19 @@
-var axios = require("axios");
-//var keys = require("./keys.js");
-//var spotify = new Spotify(keys.spotify);
+var axios = require("./.gitignore/node_modules/axios");
+var keys = require("./keys.js");
+var spotify = new Spotify(keys.spotify);
 
 var lookUpCode = process.argv[2];
 
-/*if ((lookUpCode = "spotify-this-song")) {
+if ((lookUpCode = "spotify-this-song")) {
   var search = process.argv.slice(3).join(" ");
 
-  spotify
-    .search({ type: "track", query: '"' + search + '"' })
-    .then(function(response) {
-      console.log(response);
-    })
-    .catch(function(err) {
-      console.log(err);
-    });
-} else */ if (
-  (lookUpCode = "moivie-this")
-) {
+  spotify.search({ type: "track", query: search }, function(err, data) {
+    if (err) {
+      return console.log("Error occurred: " + err);
+    }
+    console.log(data);
+  });
+} else if ((lookUpCode = "moivie-this")) {
   var movieName = process.argv.slice(3).join(" ");
 
   var queryUrl =
@@ -43,4 +39,6 @@ var lookUpCode = process.argv[2];
     if (err) throw err;
     console.log(showData);
   });
+} else {
+  console.log("Spelling.");
 }

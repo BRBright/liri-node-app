@@ -30,6 +30,7 @@ inquirer
         if (err) {
           return console.log("Error occurred: " + err);
         }
+
         console.log("Artist(s): " + data.tracks.items[0].album.artists[0].name);
         console.log("Song name: " + inquirerResponse.search);
         console.log(
@@ -47,6 +48,11 @@ inquirer
 
       axios.get(queryUrl).then(function(response) {
         var jsonData = response.data;
+
+        if (err) {
+          return console.log("Error occurred: " + err);
+        }
+
         console.log("Title: " + jsonData.Title);
         console.log("Released: " + jsonData.Released);
         console.log("IMDB Rating: " + jsonData.Ratings[0].Source.Value);
@@ -55,9 +61,6 @@ inquirer
         console.log("Language: " + jsonData.Language);
         console.log("Plot: " + jsonData.Plot);
         console.log("Actors: " + jsonData.Actors);
-        if (err) {
-          return console.log("Error occurred: " + err);
-        }
       });
     } else if (
       inquirerResponse.searchChoice === "Look for a conert by artist."
@@ -71,6 +74,11 @@ inquirer
 
       axios.get(queryUrl).then(function(response) {
         var jsonData = response.data;
+
+        if (err) {
+          return console.log("Error occurred: " + err);
+        }
+
         console.log("Name of venue: " + jsonData[0].venue.name);
         console.log(
           "Location: " +
@@ -81,9 +89,6 @@ inquirer
             jsonData[0].venue.country
         );
         console.log("Date of Event: " + jsonData[0].datetime);
-        if (err) {
-          return console.log("Error occurred: " + err);
-        }
       });
     }
   });

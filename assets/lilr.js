@@ -42,9 +42,17 @@ inquirer
 
       axios.get(queryUrl).then(function(response) {
         var jsonData = response.data;
-        console.log(jsonData);
-        if (err) throw err;
-        console.log(showData);
+        console.log("Title: " + jsonData.Title);
+        console.log("Released: " + jsonData.Released);
+        console.log("IMDB Rating: " + jsonData.Ratings[0].Source.Value);
+        console.log("Rotten Tomatoes: " + jsonData.Ratings[1].Source.Value);
+        console.log("Country made: " + jsonData.Country);
+        console.log("Language: " + jsonData.Language);
+        console.log("Plot: " + jsonData.Plot);
+        console.log("Actors: " + jsonData.Actors);
+        if (err) {
+          return console.log("Error occurred: " + err);
+        }
       });
     } else if (
       inquirerResponse.searchChoice === "Look for a conert by artist."
@@ -58,9 +66,19 @@ inquirer
 
       axios.get(queryUrl).then(function(response) {
         var jsonData = response.data;
-        console.log(jsonData);
-        if (err) throw err;
-        console.log(showData);
+        console.log("Name of venue: " + jsonData[0].venue.name);
+        console.log(
+          "Location: " +
+            jsonData[0].venue.city +
+            ", " +
+            jsonData[0].venue.region +
+            ", " +
+            jsonData[0].venue.country
+        );
+        console.log("Date of Event: " + jsonData[0].datetime);
+        if (err) {
+          return console.log("Error occurred: " + err);
+        }
       });
     }
   });

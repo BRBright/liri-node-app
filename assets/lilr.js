@@ -1,5 +1,6 @@
 var axios = require("axios");
 var inquirer = require("inquirer");
+var moment = require("moment");
 var keys = require("./keys.js");
 const Spotify = require("node-spotify-api");
 var spotify = new Spotify(keys.spotify);
@@ -46,12 +47,8 @@ inquirer
         movieName +
         "&y=&plot=short&apikey=trilogy";
 
-      axios.get(queryUrl).then(function(response) {
+      axios.get(queryUrl).then(function(response, err) {
         var jsonData = response.data;
-
-        if (err) {
-          return console.log("Error occurred: " + err);
-        }
 
         console.log("Title: " + jsonData.Title);
         console.log("Released: " + jsonData.Released);
@@ -61,6 +58,10 @@ inquirer
         console.log("Language: " + jsonData.Language);
         console.log("Plot: " + jsonData.Plot);
         console.log("Actors: " + jsonData.Actors);
+
+        if (err) {
+          console.log("Error occurred: " + err);
+        }
       });
     } else if (
       inquirerResponse.searchChoice === "Look for a conert by artist."
@@ -72,12 +73,8 @@ inquirer
         artist +
         "/events?app_id=codingbootcamp";
 
-      axios.get(queryUrl).then(function(response) {
+      axios.get(queryUrl).then(function(response, err) {
         var jsonData = response.data;
-
-        if (err) {
-          return console.log("Error occurred: " + err);
-        }
 
         console.log("Name of venue: " + jsonData[0].venue.name);
         console.log(
@@ -88,7 +85,14 @@ inquirer
             ", " +
             jsonData[0].venue.country
         );
-        console.log("Date of Event: " + jsonData[0].datetime);
+        console.log(
+          "Date of Event: " +
+            moment(jsonData[0].datetime).format("MMMM Do YYYY, h:mm:ss a")
+        );
+
+        if (err) {
+          return console.log("Error occurred: " + err);
+        }
       });
     }
   });

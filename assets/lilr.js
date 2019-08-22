@@ -30,7 +30,12 @@ inquirer
         if (err) {
           return console.log("Error occurred: " + err);
         }
-        console.log(data);
+        console.log("Artist(s): " + data.tracks.items[0].album.artists[0].name);
+        console.log("Song name: " + inquirerResponse.search);
+        console.log(
+          "Preview Link: " + data.tracks.items[0].album.external_urls.spotify
+        );
+        console.log("Album Name: " + data.tracks.items[0].album.name);
       });
     } else if (inquirerResponse.searchChoice === "Search for a movie.") {
       var movieName = inquirerResponse.search;
